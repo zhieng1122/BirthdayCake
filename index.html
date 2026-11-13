@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090c19">
+  <meta name="description" content="一份只给晓玲的生日小惊喜。">
+  <title>Happy Birthday · 晓玲</title>
+  <link rel="preload" as="image" href="assets/moonlit-garden.jpg">
+  <link rel="preload" as="image" href="assets/korean-birthday-gold-striped-candle-fine.png" fetchpriority="low">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="romance.css">
+  <link rel="stylesheet" href="polish.css">
+  <script src="script.js" defer></script>
+  <script src="polish.js" defer></script>
+</head>
+
+<body data-scene="invitation">
+  <div class="sky" id="world" aria-hidden="true">
+    <div class="garden-backdrop"></div>
+    <div class="sky-shade"></div>
+    <div class="nebula nebula-one"></div>
+    <div class="nebula nebula-two"></div>
+    <div id="stars"></div>
+    <div class="orbit orbit-one"></div>
+    <div class="orbit orbit-two"></div>
+    <div class="light-veil"></div>
+    <div class="film-grain"></div>
+  </div>
+
+  <div class="page-frame" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+  <canvas id="atmosphere" aria-hidden="true"></canvas>
+  <canvas id="fireworks" aria-hidden="true"></canvas>
+
+  <header class="header">
+    <a class="signature" href="#" id="home" aria-label="回到邀请">
+      <span class="signature-star" aria-hidden="true">✧</span>
+      <span>一份只给你的惊喜</span>
+    </a>
+
+    <button class="music-button" id="music" aria-pressed="false">
+      <span class="sound-bars" aria-hidden="true">
+        <i></i><i></i><i></i><i></i>
+      </span>
+      <span id="music-label">音乐：关</span>
+    </button>
+  </header>
+
+  <main id="main">
+    <!-- Invitation -->
+    <section class="scene active invitation" id="invitation">
+      <div class="invitation-copy">
+        <p class="eyebrow"><span class="tiny-diamond" aria-hidden="true"></span> 今夜，有一封你的来信</p>
+        <p class="invitation-name">Siau Ling</p>
+        <h1>嘿，晓玲！<span class="little-heart">♡</span></h1>
+        <p class="subtitle">偷偷给你准备了一个小惊喜～<br>这一刻，留一点时间给自己。</p>
+        <button class="primary" id="open">点开看看 ♡ <span aria-hidden="true">↗</span></button>
+        <p class="whisper invitation-whisper"><span class="small-rule" aria-hidden="true"></span> 找个舒服的位置，让惊喜慢慢发生。</p>
+      </div>
+
+      <div class="invitation-art">
+        <div class="letter-aura" aria-hidden="true"></div>
+        <div class="letter-orbit letter-orbit-one" aria-hidden="true"></div>
+        <div class="letter-orbit letter-orbit-two" aria-hidden="true"></div>
+        <span class="art-star art-star-one" aria-hidden="true">✧</span>
+        <span class="art-star art-star-two" aria-hidden="true">✦</span>
+        <p class="art-topline">星光有信 · 只寄给你</p>
+        <button class="envelope" id="envelope" aria-label="打开给晓玲的信">
+        <span class="envelope-glow"></span>
+        <span class="envelope-back"></span>
+        <span class="letter">
+          <span>致 晓玲</span>
+          <span class="letter-heart">♡</span>
+          <span>今天的你，值得被好好庆祝。</span>
+        </span>
+        <span class="envelope-front"></span>
+        <span class="envelope-flap"></span>
+        <span class="seal">♡</span>
+        <span class="envelope-address">给 Siau Ling</span>
+        </button>
+        <p class="art-bottomline"><span></span> 3月11日 <span></span></p>
+      </div>
+    </section>
+
+    <!-- Countdown -->
+    <section class="scene" id="countdown" hidden>
+      <p class="eyebrow">准备好了吗</p>
+      <div id="count" class="count" aria-live="polite">3</div>
+      <p class="subtitle">有一点点期待，对吧？</p>
+    </section>
+
+    <!-- Birthday fireworks -->
+    <section class="scene birthday" id="birthday" hidden>
+      <div class="birthday-copy">
+        <p class="eyebrow birthday-date">3月11日 · 为你庆祝</p>
+        <p class="birthday-greeting reveal" id="birthday-greeting">
+          Happy Birthday
+        </p>
+        <h1 class="birthday-name reveal" id="birthday-name">
+          Siau Ling <span>♡</span>
+        </h1>
+        <p class="birthday-age reveal" id="birthday-age">
+          23岁生日快乐！🎂
+        </p>
+      </div>
+
+      <p class="tap-hint">轻点夜空，送你一朵烟花</p>
+    </section>
+
+    <!-- Friendship reveal -->
+    <section class="scene friendship" id="friendship" hidden>
+      <p class="eyebrow pisces-label" id="pisces-label">双鱼座 ♓</p>
+
+      <div class="constellation-wrap">
+        <button
+          class="constellation"
+          id="constellation"
+          type="button"
+          aria-label="点亮双鱼座，庆祝我们17年的友情"
+        ></button>
+
+        <div class="number-field" id="friend-number" role="img" aria-label="双鱼座的星光">
+          <span class="number-fallback" aria-hidden="true">17</span>
+        </div>
+      </div>
+
+      <div class="friend-story">
+        <div id="friend-intro" class="friend-intro" aria-live="polite"></div>
+        <div class="friend-reveal" id="friend-reveal" hidden>
+          <h2>原来，我们已经认识这么久了。</h2>
+          <p class="subtitle">
+            从小时候到现在，居然已经17年了哈哈哈。<br>
+            时间真的过得好快～
+          </p>
+        </div>
+        <p class="pisces-wish" id="pisces-wish" aria-live="polite"></p>
+      </div>
+    </section>
+
+    <!-- Photo gallery -->
+    <section class="scene memories" id="memories" hidden>
+      <p class="eyebrow">把平凡的日子，收藏起来</p>
+      <h2>一些属于我们的回忆 <span class="heading-symbol">📸</span></h2>
+      <p class="subtitle">小时候的我们，和慢慢长大的我们。</p>
+
+      <div class="gallery" id="gallery" role="group" aria-label="我们的回忆照片"></div>
+
+      <button class="memory-replay" id="memory-replay" type="button" hidden>
+        <span aria-hidden="true">↻</span> 再飘落一次
+      </button>
+
+      <p class="gallery-note" id="gallery-note">
+        以后还要拍更多照片～
+      </p>
+
+      <button class="primary" id="gallery-next">
+        继续看看 ♡ <span aria-hidden="true">↗</span>
+      </button>
+    </section>
+
+    <!-- Cake -->
+    <section class="scene cake-scene" id="cake" hidden>
+      <div class="cake-copy">
+        <p class="eyebrow">这一刻，留给你的愿望</p>
+      <h2>晓玲，23岁的愿望准备好了吗？</h2>
+      <p class="subtitle" id="cake-instruction" role="status" aria-live="polite">先许个愿，再开启麦克风吹蜡烛吧～</p>
+
+        <button class="primary" id="blow" type="button" aria-pressed="false">
+        开始吹蜡烛 🎙
+      </button>
+      <button class="secondary blow-fallback" id="blow-fallback" type="button" hidden>点击吹灭 ✨</button>
+      <div class="microphone-controls" id="microphone-controls" hidden>
+        <label for="microphone-input">正在使用的麦克风</label>
+        <select id="microphone-input" aria-describedby="microphone-hint"></select>
+        <label class="microphone-level" for="microphone-level">收音强度
+          <meter id="microphone-level" min="0" max="1" value="0">0</meter>
+        </label>
+        <div class="blow-feedback">
+          <progress id="blow-progress" max="1" value="0" aria-label="吹气完成进度"></progress>
+          <output id="blow-feedback" aria-live="polite">等待收音</output>
+        </div>
+        <button class="secondary" id="blow-calibrate" type="button" disabled>校准我的吹气</button>
+        <p id="microphone-hint">请对准上方所选设备的麦克风孔吹气。</p>
+        <p id="microphone-diagnostics">检测结果会保留在这里，方便确认吹气有没有被识别。</p>
+      </div>
+
+      <p class="whisper">愿望不用说出来，悄悄放在心里就好。</p>
+      </div>
+
+      <div class="cake-art" id="cake-art">
+        <div class="cake-halo"></div>
+
+        <svg
+          class="cake-svg"
+          viewBox="16 16 1220 1228"
+          role="img"
+          aria-label="双层米白、奶白鲜奶油生日蛋糕，配芒果、龙眼、奶油裱花和巧克力卷，插着一支纤细修长的金色螺旋条纹蜡烛"
+        >
+          <defs>
+            <radialGradient id="flameGold">
+              <stop stop-color="#fffdeb"/>
+              <stop offset=".52" stop-color="#ffe2a0"/>
+              <stop offset="1" stop-color="#e4a455"/>
+            </radialGradient>
+            <filter id="flameGlow" x="-200%" y="-100%" width="500%" height="400%">
+              <feGaussianBlur stdDeviation="7"/>
+            </filter>
+          </defs>
+
+          <!-- A locally served original product photograph with unlit candles. -->
+          <image
+            class="cake-photo"
+            href="assets/korean-birthday-gold-striped-candle-fine.png"
+            x="0" y="0" width="1254" height="1254"
+            preserveAspectRatio="xMidYMid meet"
+          />
+
+          <!-- Live flames are aligned to the actual candle wicks in the photo. -->
+          <g class="flames">
+            <g transform="translate(777 92)">
+              <g class="flame flame-one">
+                <ellipse cx="0" cy="-20" rx="15" ry="24" fill="#f5cc87" opacity=".5" filter="url(#flameGlow)"/>
+                <path d="M0 0 C-16-6-10-26 0-46 C10-26 18-5 0 0Z" fill="url(#flameGold)"/>
+                <path d="M0-3 C-6-7-3-15 0-20 C4-13 7-6 0-3Z" fill="#fff9dc"/>
+              </g>
+            </g>
+          </g>
+          <g class="smoke" fill="none" stroke="#f0e5df" stroke-width="3" stroke-linecap="round">
+            <path transform="translate(777 92)" d="M0 0 C-22-22 20-38 0-63 C-14-80 10-95 0-109"/>
+          </g>
+        </svg>
+      </div>
+    </section>
+
+    <!-- Wishes -->
+    <section class="scene wishes-scene" id="wishes" hidden>
+      <div class="wish-paper">
+        <span class="paper-star" aria-hidden="true">✧</span>
+        <p class="eyebrow">有几句话，想送给今天的你</p>
+        <div id="wish-text" class="wish-text"></div>
+        <div class="paper-signature">给晓玲，生日这一天 ♡</div>
+      </div>
+
+      <button class="primary" id="wishes-next" hidden>
+        收好这份祝福 ♡ <span aria-hidden="true">↗</span>
+      </button>
+    </section>
+
+    <!-- Last gift -->
+    <section class="scene gift-scene" id="gift" hidden>
+      <div id="gift-cover">
+      <p class="eyebrow">故事的最后一页</p>
+      <h2>等等，还有三份小幸运 🎁</h2>
+      <p class="subtitle">给23岁的你，准备了一间生日礼物小屋。</p>
+
+      <button class="gift-box" id="final-gift" aria-label="打开最后一个小惊喜">
+        <span class="gift-bow"></span>
+        <span class="gift-lid"></span>
+        <span class="gift-body"></span>
+        <span class="gift-ribbon"></span>
+      </button>
+
+      <p class="whisper">轻轻点一下，把它打开。</p>
+      </div>
+
+      <div class="birthday-gift-room" id="birthday-gift-room" hidden>
+        <p class="eyebrow">A LITTLE LUCK, JUST FOR YOU</p>
+        <h2 id="gift-room-title" tabindex="-1">晓玲的生日礼物小屋</h2>
+        <p class="subtitle">23岁，要有好运，也要有可爱的小惊喜。</p>
+        <div class="birthday-gift-grid">
+          <button class="birthday-gift-entry fortune-entry" type="button" data-gift-game="fortune" aria-haspopup="dialog">
+            <span class="gift-entry-art" aria-hidden="true">🔮<i>✧</i></span>
+            <span class="gift-entry-number">01 / MAKE A WISH</span>
+            <strong>23岁幸运签</strong>
+            <span class="gift-entry-description">抽一份只属于今天的好预兆</span>
+            <span class="gift-entry-status" id="fortune-entry-status">抽一支签 <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="birthday-gift-entry scratch-entry" type="button" data-gift-game="scratch" aria-haspopup="dialog">
+            <span class="gift-entry-art" aria-hidden="true">🎟️<i>✦</i></span>
+            <span class="gift-entry-number">02 / A SECRET INSIDE</span>
+            <strong>刮刮乐生日卡</strong>
+            <span class="gift-entry-description">亲手刮开，看看藏着什么</span>
+            <span class="gift-entry-status" id="scratch-entry-status">刮开惊喜 <span aria-hidden="true">↗</span></span>
+          </button>
+          <button class="birthday-gift-entry claw-entry" type="button" data-gift-game="claw" aria-haspopup="dialog">
+            <span class="gift-entry-art" aria-hidden="true">🧸<i>♡</i></span>
+            <span class="gift-entry-number">03 / CATCH SOME JOY</span>
+            <strong>专属抓娃娃机</strong>
+            <span class="gift-entry-description">把小小的快乐，一只只带回家</span>
+            <span class="gift-entry-status" id="claw-entry-status">去抓娃娃 <span aria-hidden="true">↗</span></span>
+          </button>
+        </div>
+        <p class="gift-room-note">想玩哪一个，就先打开哪一个。今天的幸运不限次数 ♡</p>
+        <button class="primary" id="gift-finale" type="button">收好幸运，去看烟花 <span aria-hidden="true">↗</span></button>
+      </div>
+    </section>
+
+    <!-- Final fireworks -->
+    <section class="scene finale" id="finale" hidden>
+      <div class="number-field final-number" id="final-number" aria-live="polite"></div>
+
+      <div class="final-copy" id="final-copy" hidden>
+        <p class="eyebrow">3月11日 · 今夜的星光，都送给你</p>
+        <div class="final-emblem" aria-hidden="true"><span></span>✧<span></span></div>
+        <h1>
+          <span class="final-greeting">Happy Birthday</span>
+          <span class="final-name">Siau Ling <span class="little-heart" aria-hidden="true">♡</span></span>
+        </h1>
+        <p class="final-age"><span class="final-age-number">23</span><span>岁快乐呀，晓玲！</span></p>
+        <p class="subtitle">17年的友情，未完待续～</p>
+        <div class="fine-line"></div>
+        <p class="whisper">好啦，今天的惊喜就到这里 ♡</p>
+
+        <div class="final-actions">
+          <button class="primary" id="replay" type="button"><span aria-hidden="true">↺</span>再看一次</button>
+          <button class="secondary" id="more-fireworks" type="button"><span aria-hidden="true">✧</span>再放一次烟花</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Small discoverable surprises -->
+  <aside class="hidden-surprises" aria-label="夜空里的小惊喜">
+    <button
+      class="secret secret-star"
+      data-message="愿你每天都有小幸运 ✨"
+      aria-label="点点这颗特别的星"
+    >✧</button>
+
+    <button
+      class="secret secret-heart"
+      data-message="以后也要继续一起玩呀 ♡"
+      aria-label="点点这颗小爱心"
+    >♡</button>
+
+    <button
+      class="secret secret-gift"
+      data-message="嘿嘿，还有惊喜哦 🎁"
+      aria-label="发现一个小礼物"
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M4 10h16v10H4zM3 6h18v4H3zM12 6v14"/>
+        <path d="M12 6C5 6 6 0 9 2c2 1 3 4 3 4Zm0 0c7 0 6-6 3-4-2 1-3 4-3 4Z"/>
+      </svg>
+    </button>
+  </aside>
+
+  <footer class="footer">
+    <div class="journey">
+      <span class="chapter-number" id="chapter-number">01</span>
+      <span class="journey-line"><span id="progress"></span></span>
+      <span id="chapter-label">一封小小的邀请</span>
+    </div>
+
+    <nav class="scene-navigation" aria-label="页面导航">
+      <button class="back" id="previous" type="button" hidden>
+        <span aria-hidden="true">←</span> 上一页
+      </button>
+      <button class="skip" id="skip" type="button" hidden>
+        继续 <span aria-hidden="true">→</span>
+      </button>
+    </nav>
+
+    <span class="footer-note" id="footer-note">请亲手打开这份惊喜</span>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <dialog class="photo-dialog" id="photo-dialog">
+    <button class="dialog-close" id="photo-close" aria-label="关闭照片">×</button>
+    <img id="large-photo" alt="">
+    <p id="large-caption"></p>
+
+    <div class="photo-navigation">
+      <button class="secondary" id="photo-prev">上一张</button>
+      <button class="secondary" id="photo-next">下一张</button>
+    </div>
+  </dialog>
+
+  <dialog class="birthday-game-dialog" id="birthday-game-dialog" aria-labelledby="game-dialog-title">
+    <div class="birthday-game-shell">
+      <header class="birthday-game-header">
+        <div><p>FOR SIAU LING · 23</p><h2 id="game-dialog-title">23岁的幸运小屋</h2></div>
+        <button class="birthday-game-close" id="gift-game-close" type="button" aria-label="关闭游戏，返回礼物小屋">×</button>
+      </header>
+      <div class="birthday-game-tabs" role="tablist" aria-label="选择生日小游戏">
+        <button id="fortune-tab" role="tab" type="button" data-game-tab="fortune" aria-controls="fortune-panel" aria-selected="true">🔮 幸运签</button>
+        <button id="scratch-tab" role="tab" type="button" data-game-tab="scratch" aria-controls="scratch-panel" aria-selected="false" tabindex="-1">🎟️ 刮刮卡</button>
+        <button id="claw-tab" role="tab" type="button" data-game-tab="claw" aria-controls="claw-panel" aria-selected="false" tabindex="-1">🧸 抓娃娃</button>
+      </div>
+
+      <section class="birthday-game-panel fortune-panel" id="fortune-panel" role="tabpanel" aria-labelledby="fortune-tab">
+        <p class="game-overline">愿你的23岁，处处有小幸运</p>
+        <div class="fortune-layout">
+          <div class="fortune-oracle" aria-hidden="true"><span class="oracle-star">✧</span><div class="oracle-orb"><span>23</span><i>✦</i></div><div class="oracle-base"></div><p>THE STARS ARE ON YOUR SIDE</p></div>
+          <article class="fortune-slip" id="fortune-slip" aria-live="polite" aria-atomic="true">
+            <span class="fortune-slip-seal">晓玲专属</span>
+            <p id="fortune-number">生日限定 · 第23签</p>
+            <h3 id="fortune-title">你的好运，待签收</h3>
+            <p class="fortune-message" id="fortune-message">在心里许个小小的愿望，<br>然后抽一支属于你的幸运签。</p>
+            <span class="fortune-slip-star" aria-hidden="true">✧</span>
+          </article>
+        </div>
+        <button class="game-primary" id="draw-fortune" type="button">抽取我的幸运签 ✧</button>
+        <p class="game-footnote">这里的每一支签，都是送给你的生日祝福。</p>
+      </section>
+
+      <section class="birthday-game-panel scratch-panel" id="scratch-panel" role="tabpanel" aria-labelledby="scratch-tab" hidden>
+        <p class="game-overline">有一份藏起来的生日快乐，等你发现</p>
+        <div class="birthday-scratch-ticket">
+          <div class="scratch-ticket-top"><span>HAPPY BIRTHDAY CLUB</span><span>No. 0023</span></div>
+          <h3>晓玲的生日特别奖</h3>
+          <div class="scratch-surface" id="scratch-surface">
+            <div class="scratch-prize" id="scratch-prize" aria-hidden="true"><span>✦ 生日隐藏款 ✦</span><strong>快乐加倍券</strong><p>愿你想吃的都吃到，想去的都抵达。<br>23岁的每一天，都有小事值得开心。</p><small>专属：晓玲 · 有效期：每一天 ♡</small></div>
+            <canvas id="birthday-scratch" aria-label="按住鼠标或用手指刮开生日卡；也可以使用下方的直接揭晓按钮。"></canvas>
+          </div>
+          <div class="scratch-ticket-bottom"><span>♡ MADE JUST FOR YOU</span><span>03 · 11</span></div>
+        </div>
+        <p class="scratch-status" id="scratch-status" role="status">按住拖动，刮开这份小惊喜。</p>
+        <div class="game-small-actions"><button class="game-primary" id="scratch-reveal" type="button">直接揭晓惊喜</button><button class="game-quiet-button" id="scratch-reset" type="button">再刮一次 ↺</button></div>
+      </section>
+
+      <section class="birthday-game-panel claw-panel" id="claw-panel" role="tabpanel" aria-labelledby="claw-tab" hidden>
+        <p class="game-overline">左右瞄准，按下抓取，把可爱带回家</p>
+        <div class="birthday-claw-machine">
+          <div class="claw-marquee"><span aria-hidden="true">✧</span> SIAU LING'S HAPPY CLUB <span aria-hidden="true">✧</span></div>
+          <div class="claw-glass" id="claw-arena" tabindex="0" role="group" aria-label="抓娃娃机，使用左右方向键移动，在这里按空格或回车抓取">
+            <svg class="claw-svg" viewBox="0 0 400 300" aria-hidden="true">
+              <defs>
+                <g id="birthday-bear"><circle cx="-18" cy="-22" r="10" fill="currentColor"/><circle cx="18" cy="-22" r="10" fill="currentColor"/><ellipse cy="15" rx="24" ry="25" fill="currentColor"/><ellipse cx="-23" cy="12" rx="9" ry="13" fill="currentColor" transform="rotate(25 -23 12)"/><ellipse cx="23" cy="12" rx="9" ry="13" fill="currentColor" transform="rotate(-25 23 12)"/><ellipse cx="-14" cy="34" rx="12" ry="9" fill="currentColor"/><ellipse cx="14" cy="34" rx="12" ry="9" fill="currentColor"/><circle cy="-6" r="27" fill="currentColor"/><ellipse cy="2" rx="13" ry="10" fill="#fff4e7"/><circle cx="-10" cy="-10" r="2.4" fill="#5f454f"/><circle cx="10" cy="-10" r="2.4" fill="#5f454f"/><ellipse cy="-1" rx="3.5" ry="2.5" fill="#805866"/><path d="M0 1v4m-5-1q5 5 10 0" fill="none" stroke="#805866" stroke-width="1.5"/><ellipse cx="-18" cy="0" rx="5" ry="3" fill="#df9da4" opacity=".6"/><ellipse cx="18" cy="0" rx="5" ry="3" fill="#df9da4" opacity=".6"/><path d="M-12 15 0 20-12 25zm24 0L0 20l12 5z" fill="#b9859f"/><circle cy="20" r="3" fill="#f6e5c4"/></g>
+                <g id="birthday-bunny"><ellipse cx="-12" cy="-37" rx="9" ry="24" fill="currentColor" transform="rotate(-12 -12 -37)"/><ellipse cx="12" cy="-37" rx="9" ry="24" fill="currentColor" transform="rotate(12 12 -37)"/><ellipse cx="-12" cy="-37" rx="3" ry="15" fill="#e4b0c1"/><ellipse cx="12" cy="-37" rx="3" ry="15" fill="#e4b0c1"/><ellipse cy="17" rx="23" ry="24" fill="currentColor"/><ellipse cx="-14" cy="35" rx="12" ry="8" fill="currentColor"/><ellipse cx="14" cy="35" rx="12" ry="8" fill="currentColor"/><circle cy="-6" r="26" fill="currentColor"/><circle cx="-9" cy="-9" r="2.4" fill="#5f454f"/><circle cx="9" cy="-9" r="2.4" fill="#5f454f"/><path d="m-3 0 3 3 3-3M0 3v3" fill="none" stroke="#b77c91" stroke-width="2"/><ellipse cx="-16" cy="0" rx="5" ry="3" fill="#e5a8ba"/><ellipse cx="16" cy="0" rx="5" ry="3" fill="#e5a8ba"/><path d="m0 14 3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z" fill="#e7c27e"/></g>
+              </defs>
+              <path d="M25 18h350" stroke="#cfa5be" stroke-width="8" stroke-linecap="round"/>
+              <path d="M25 20h350" stroke="#fff4ed" stroke-width="2" opacity=".7"/>
+              <ellipse cx="203" cy="270" rx="175" ry="20" fill="#b4a5d133"/>
+              <text x="40" y="80" fill="#d2bdd8" font-size="20">✧</text><text x="335" y="125" fill="#d2bdd8" font-size="16">♡</text>
+              <g id="claw-toy-0" transform="translate(83 235)" style="color:#ddb78e"><use href="#birthday-bear"/></g>
+              <g id="claw-toy-1" transform="translate(164 225)" style="color:#f4e5dd"><use href="#birthday-bunny"/></g>
+              <g id="claw-toy-2" transform="translate(249 240)" style="color:#d8bfdc"><use href="#birthday-bear"/></g>
+              <g id="claw-toy-3" transform="translate(326 224)" style="color:#e8afbf"><use href="#birthday-bunny"/></g>
+              <g id="claw-grabber" transform="translate(200 42)"><path id="claw-cable" d="M0-24V0" fill="none" stroke="#a38aa6" stroke-width="3"/><rect x="-12" y="-3" width="24" height="17" rx="6" fill="#bda0bb"/><circle cy="5" r="4" fill="#f5e5cb"/><path id="claw-left-arm" d="M-9 10-24 30-17 40" fill="none" stroke="#977e9c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><path id="claw-right-arm" d="m9 10 15 20-7 10" fill="none" stroke="#977e9c" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+            </svg>
+          </div>
+          <div class="claw-machine-base"><span class="claw-prize-door">PRIZE OUT ♡</span><span>FREE PLAY · 生日快乐</span><i aria-hidden="true"></i></div>
+        </div>
+        <p class="claw-status" id="claw-status" role="status">把爪子移到喜欢的玩偶正上方吧。</p>
+        <div class="claw-controls"><button class="game-direction" id="claw-left" type="button" aria-label="爪子向左移动">←</button><button class="game-primary" id="claw-drop" type="button">抓一下 ♡</button><button class="game-direction" id="claw-right" type="button" aria-label="爪子向右移动">→</button></div>
+        <div class="claw-collection" id="claw-collection" aria-live="polite"><span>我的小收藏</span><p id="claw-collection-items">还空着，第一只会是谁呢？</p></div>
+        <button class="game-quiet-button" id="claw-refill" type="button">重新摆满玩偶 ↺</button>
+      </section>
+    </div>
+  </dialog>
+
+  <noscript>
+    <p class="noscript">请开启浏览器的脚本功能，再来打开这份惊喜。</p>
+  </noscript>
+</body>
+</html>

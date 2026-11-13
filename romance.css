@@ -1,0 +1,304 @@
+/* Moonlit correspondence: visual theme layered over the base scene layout. */
+:root {
+  --night: #0d0c17;
+  --cream: #f6ebdf;
+  --muted: #b7a9b4;
+  --gold: #e7c999;
+  --pink: #d8a3b2;
+}
+body { background: var(--night); isolation: isolate; }
+::selection { background: #b78a9855; color: #fff2de; }
+
+/* Local original artwork, mist and light on independent planes. */
+.sky { z-index: -1; background: #100d1a; }
+.garden-backdrop {
+  position: absolute;
+  inset: -22px;
+  background: url("assets/moonlit-garden.jpg") center 63% / cover no-repeat;
+  opacity: .85;
+  transform: translate3d(calc(var(--pointer-x, 0px) * -.45), calc(var(--pointer-y, 0px) * -.45), 0) scale(1.025);
+  transition: opacity 1.7s;
+  will-change: transform;
+}
+.sky-shade { position: absolute; inset: 0; background: linear-gradient(#0c0a174a, #0c0a172b 40%, #0c0a1744 70%, #0c0a17b8), radial-gradient(ellipse, transparent 18%, #08071366); }
+.light-veil { position: absolute; inset: -25%; background: radial-gradient(ellipse at 75% 75%, #a986c31b, transparent 40%), radial-gradient(ellipse at 25% 45%, #c982a010, transparent 35%); animation: mist-drift 22s ease-in-out infinite alternate; }
+.film-grain { position: absolute; inset: 0; opacity: .14; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Cpath fill='%23ffffff' opacity='.2' filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E"); }
+.nebula { opacity: .07; }
+.orbit { border-color: #eed3b007; }
+#atmosphere { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; }
+#fireworks { z-index: 3; }
+body[data-scene="birthday"] .garden-backdrop,
+body[data-scene="finale"] .garden-backdrop { opacity: .3; }
+body[data-scene="wishes"] .garden-backdrop { opacity: .5; }
+body[data-scene="countdown"] .garden-backdrop { opacity: .18; }
+.page-frame { position: fixed; inset: 18px; z-index: 8; border: 1px solid #e2c9a314; border-radius: 3px; pointer-events: none; }
+.page-frame i { position: absolute; width: 12px; height: 12px; border: solid #e2c9a35c; }
+.page-frame i:nth-child(1) { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.page-frame i:nth-child(2) { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
+.page-frame i:nth-child(3) { bottom: -1px; left: -1px; border-width: 0 0 1px 1px; }
+.page-frame i:nth-child(4) { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
+
+/* Editorial navigation and consistent, fine gold details. */
+.header { padding: 37px 5.3vw; background: linear-gradient(#0c0a1766, transparent); }
+.signature { color: #ddcdd1; font-size: 10px; letter-spacing: .22em; }
+.signature-star { font-size: 30px; text-shadow: 0 0 18px #e8c79a33; }
+.music-button { padding: 9px 16px; background: #18132066; backdrop-filter: blur(12px); color: #d3c4cd; font-size: 10px; letter-spacing: .1em; }
+.footer { min-height: 92px; padding: 22px 5.3vw 28px; background: linear-gradient(transparent, #0c0a17c9 65%); }
+.journey { color: #b4a4b6; }
+.chapter-number { font: italic 22px Georgia, serif; color: #dfc397; }
+.journey-line { width: 65px; }
+.journey-line > span { box-shadow: 0 0 9px #e7c99966; }
+.footer-note { color: #aa97aa; }
+.scene { padding: 126px 28px 118px; animation: scene-in 1.2s cubic-bezier(.22, 1, .36, 1) both; }
+h2 { font-size: clamp(24px, 3vw, 38px); }
+.eyebrow { letter-spacing: .3em; }
+.subtitle { line-height: 2.25; letter-spacing: .08em; }
+.whisper { color: #ac99ad; }
+.primary, .secondary { position: relative; min-height: 49px; border-radius: 30px; overflow: hidden; transition: transform .3s, box-shadow .3s, border-color .3s; }
+.primary { background: linear-gradient(110deg, #efd8b4, #d8b27f); border: 1px solid #ffe8c380; box-shadow: 0 7px 30px #c6996630, inset 0 1px 0 #fff6e8aa; color: #3f2b3a; }
+.primary::before { content: ""; position: absolute; inset: -50% auto -50% -65%; width: 40%; transform: rotate(25deg); background: linear-gradient(90deg, transparent, #fff8e580, transparent); transition: left .7s; }
+.primary:hover::before { left: 125%; }
+.primary:disabled { opacity: .7; }
+.secondary { background: #21182788; border-color: #e6c39144; backdrop-filter: blur(10px); }
+
+/* Opening spread: personal typography opposite a tactile floating letter. */
+.invitation { display: grid; grid-template-columns: 1fr 1fr; gap: 55px; width: min(1180px, 88vw); padding: 130px 0 125px; margin: auto; text-align: left; }
+.invitation-copy { position: relative; z-index: 4; padding-bottom: 16px; }
+.invitation .eyebrow { display: flex; align-items: center; gap: 11px; margin-bottom: 22px; font-size: 10px; }
+.tiny-diamond { width: 5px; height: 5px; transform: rotate(45deg); border: 1px solid var(--gold); box-shadow: 0 0 10px #e7c99933; }
+.invitation-name { margin: 0 0 22px -4px; font: italic clamp(65px, 7vw, 104px)/1.06 Georgia, "Times New Roman", serif; letter-spacing: -.06em; color: #ead0b9; text-shadow: 0 0 60px #ddafaf12; }
+.invitation h1 { font-size: clamp(32px, 3.6vw, 48px); letter-spacing: .12em; }
+.invitation .subtitle { margin-top: 25px; color: #c1afbe; line-height: 2.4; font-size: 13px; }
+.invitation .primary { margin-top: 31px; min-width: 190px; }
+.invitation-whisper { display: flex; align-items: center; gap: 11px; font-size: 9px; }
+.small-rule { width: 22px; height: 1px; background: #cfb4a35c; }
+.invitation-art { position: relative; display: grid; place-items: center; width: 100%; height: 445px; perspective: 1200px; }
+.letter-aura { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(ellipse, #d692a01a, #c3a4d00c 40%, transparent 68%); animation: aura-breathe 7s ease-in-out infinite alternate; }
+.letter-orbit { position: absolute; width: 365px; height: 365px; border: 1px solid #ead1b422; border-radius: 50%; transform: rotate(-24deg); }
+.letter-orbit::before { content: ""; position: absolute; left: 18%; top: 10%; width: 5px; height: 5px; background: #e7c999; border-radius: 50%; box-shadow: 0 0 14px #eccd94; }
+.letter-orbit-two { width: 415px; height: 415px; border-style: dashed; border-color: #ead1b40e; animation: orbit-turn 100s linear infinite; }
+.letter-orbit-two::before { top: 68%; left: 3%; width: 3px; height: 3px; opacity: .5; }
+.art-star { position: absolute; color: #ebc99d; text-shadow: 0 0 18px #e8c79a66; }
+.art-star-one { top: 69px; right: 56px; font-size: 30px; animation: twinkle 4s ease-in-out infinite alternate; }
+.art-star-two { bottom: 85px; left: 25px; font-size: 12px; opacity: .7; }
+.art-topline, .art-bottomline { position: absolute; left: 0; right: 0; text-align: center; color: #baa3b2; font-size: 9px; letter-spacing: .27em; }
+.art-topline { top: 44px; }
+.art-bottomline { bottom: 34px; display: flex; align-items: center; justify-content: center; gap: 14px; color: #e2c6a8; }
+.art-bottomline span { height: 1px; width: 24px; background: #d8bbaa44; }
+.envelope { width: 310px; height: 198px; margin: 18px 0 0; animation: letter-float 7s ease-in-out infinite; transform-style: preserve-3d; }
+.envelope-back { border: 1px solid #d7b0b270; box-shadow: 0 30px 65px #0006, 0 0 80px #d79ab51c; }
+.envelope-front { background: linear-gradient(145deg, #d0a5b0, #b37f94 65%, #a9768a); }
+.envelope-front::after { border-color: #f0d2c84a; }
+.envelope-front::before { content: ""; position: absolute; inset: 0; background: linear-gradient(32deg, transparent 49.7%, #f2ced04d 50%, transparent 50.4%), linear-gradient(-32deg, transparent 49.7%, #7b4b6736 50%, transparent 50.4%); }
+.envelope-flap { background: linear-gradient(155deg, #e0b9bf, #bf8d9e 78%); }
+.letter {
+  justify-content: flex-start;
+  gap: 8px;
+  padding: 18px 12px;
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.65;
+  background: linear-gradient(135deg, #fff5e6, #eadbcb);
+}
+.letter-heart { line-height: 1; }
+.art-topline { transition: opacity .35s, transform .5s; }
+.invitation-art.is-opening .art-topline { opacity: 0; transform: translateY(-10px); }
+.seal { left: calc(50% - 24px); top: 87px; width: 48px; height: 48px; border-radius: 44% 47% 43% 46%; background: radial-gradient(ellipse at 35% 28%, #f1d5a5, #c99f64 55%, #ae7948); color: #896044; font-size: 28px; box-shadow: 0 5px 12px #6a384d55, inset 0 0 0 4px #e1b98388, inset 0 0 0 5px #ac7c4466; }
+.envelope-address { bottom: 22px; text-align: center; font: italic 12px Georgia, var(--serif); }
+.envelope-glow { inset: -70px; background: radial-gradient(ellipse, #ffdcaa80, transparent 64%); }
+.envelope.opened .letter { transform: translateY(-118px); }
+
+/* Every chapter has a slightly different rhythm. */
+.count { position: relative; display: grid; place-items: center; width: 270px; height: 270px; min-height: 0; margin: 24px 0 10px; font-size: 160px; line-height: 1; }
+.count::before, .count::after { content: ""; position: absolute; inset: 3px; border: 1px solid #e4c79724; border-radius: 50%; }
+.count::after { inset: -12px; border: 1px dashed #e4c79712; }
+.birthday-name { font-size: clamp(61px, 10vw, 145px); letter-spacing: -.05em; color: #f4d7a4; }
+.birthday-date { margin-bottom: 28px; }
+.reveal { filter: blur(5px); transition: opacity 1.5s, transform 1.5s, filter 1.5s; }
+.reveal.visible { filter: blur(0); }
+.tap-hint { bottom: 125px; color: #beadbf; }
+.tap-hint::before { content: "✧"; display: block; color: var(--gold); margin-bottom: 9px; font-size: 22px; }
+.friendship h2 { font-size: clamp(23px, 2.7vw, 34px); }
+.constellation-wrap { width: min(470px, 86vw); height: 285px; margin: 22px auto 12px; }
+.constellation polyline { stroke-dasharray: 1600; animation: constellation-draw 4s ease both; }
+.year-label { pointer-events: none; font-size: 20px; bottom: 29px; }
+.gallery { gap: 38px; margin: 48px auto 30px; }
+.memories { overflow-x: clip; }
+.gallery .photo-waiting { opacity: 0; }
+.gallery .photo-dropping { will-change: transform, opacity; pointer-events: none; }
+.memory-replay { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; margin: -7px 0 3px; padding: 10px 16px; border: 1px solid #dfc69e2e; border-radius: 25px; background: #20172570; color: #d6bca6; font-size: 10px; letter-spacing: .1em; transition: color .25s, border-color .25s; }
+.memory-replay span { font-size: 16px; }
+.memory-replay:hover { border-color: #e5c79777; color: #f3ddbe; }
+.polaroid { position: relative; width: 250px; padding: 13px 13px 27px; border: 1px solid #fff4e8; background: linear-gradient(120deg, #f8efe4, #e9ddcf); box-shadow: 0 20px 55px #0006, inset 0 0 12px #d7c4ac33; transition: transform .5s cubic-bezier(.2, .8, .2, 1), box-shadow .5s; }
+.polaroid::before { content: ""; position: absolute; z-index: 1; left: calc(50% - 32px); top: -12px; width: 64px; height: 24px; background: #d9bf987d; border: 1px solid #e5cda05c; transform: rotate(-7deg); }
+.polaroid::after { content: "珍藏"; position: absolute; right: 15px; bottom: 12px; color: #a7858e77; border: 1px solid #a7858e44; padding: 3px 4px; font: 8px var(--serif); transform: rotate(-12deg); }
+button.polaroid:hover { z-index: 2; transform: translateY(-13px) rotate(0) scale(1.035); box-shadow: 0 32px 60px #0007; }
+.polaroid img { height: 240px; filter: saturate(.85); }
+.polaroid p { margin-top: 20px; letter-spacing: .1em; }
+.empty-photo { width: 270px; }
+.gallery-note { color: #b7a7b8; }
+.cake-scene { padding-top: 108px; }
+.cake-scene h2 { font-size: clamp(25px, 2.7vw, 36px); }
+.cake-scene .subtitle { margin-top: 12px; }
+.cake-art { width: min(620px, 94vw); margin: 12px auto -10px; }
+.cake-svg { filter: drop-shadow(0 22px 25px #0005) drop-shadow(0 0 24px #e6c3910c); }
+.cake-halo { inset: 3% 8% 6%; border: 1px solid #e2c3921f; background: radial-gradient(ellipse at 50% 28%, #f3c58929, #d99cb311 48%, transparent 70%); }
+.cake-scene .primary { margin-top: 22px; }
+.cake-scene .whisper { margin-top: 18px; }
+.cake-halo::before, .cake-halo::after { content: ""; position: absolute; border-radius: 50%; border: 1px solid #ebd0ad14; }
+.cake-halo::before { inset: 13px; }
+.cake-halo::after { inset: -17px; border-style: dashed; }
+.extinguished .cake-halo { opacity: .25; }
+
+/* Warm paper gives the birthday letter a tangible, intimate texture. */
+.wish-paper { width: min(555px, 100%); padding: 42px 42px 28px; background: linear-gradient(120deg, #fff7e9, #eee0cf); color: #66515c; border-color: #fff2ddcc; box-shadow: 0 20px 90px #0005, 0 0 70px #e9c69b0b; }
+.wish-paper::before { content: ""; position: absolute; inset: 9px; border: 1px solid #ad8a6855; pointer-events: none; }
+.wish-paper::after { content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .14; background: repeating-linear-gradient(0deg, transparent, transparent 3px, #886f5f11 4px); }
+.paper-star { top: 26px; right: 26px; color: #af855c; }
+.wish-paper .eyebrow { margin-bottom: 25px; color: #997348; letter-spacing: .15em; font-size: 9px; }
+.wish-text { min-height: 385px; }
+.wish-text p { line-height: 1.95; margin-bottom: 14px; color: #705661; animation-duration: 1.3s; }
+.wish-text p:first-child { color: #8b624d; font-size: 21px; margin-bottom: 18px; }
+.paper-signature { margin-top: 22px; padding-top: 16px; border-color: #b68f6d55; font: 11px var(--serif); color: #99747c; }
+.gift-box { margin: 65px auto 32px; filter: drop-shadow(0 0 30px #deb78833); }
+.gift-box::before { content: ""; position: absolute; width: 250px; height: 250px; left: -55px; top: -40px; border: 1px solid #e6c3912b; border-radius: 50%; background: radial-gradient(ellipse, #e1b7a311, transparent 67%); }
+.gift-box::after { content: "✧"; position: absolute; right: -55px; top: 12px; color: #e6c391aa; font-size: 20px; }
+.gift-body { background: linear-gradient(115deg, #d2a2b3, #a97690 70%, #94617d); box-shadow: inset -8px 0 18px #6d3f5a33, 0 20px 35px #0003; }
+.gift-lid { background: linear-gradient(120deg, #e0bbca, #bb8da7); border: 1px solid #edceda77; }
+.gift-box.opened { animation: none; }
+.gift-box.opened .gift-lid { transform: translateY(-65px) rotate(-18deg); opacity: 0; transition: transform .9s, opacity .9s; }
+.gift-box.opened .gift-bow { opacity: 0; transition: opacity .5s; }
+.gift-box.opened::before { transform: scale(1.3); background: radial-gradient(ellipse, #e1b7a333, transparent 67%); transition: transform 1s; }
+.final-copy h1 { font-size: clamp(52px, 8vw, 104px); color: #f1d4a8; text-shadow: 0 0 55px #edc5921c; }
+.fine-line { background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+.secret { color: #e1bd9d7d; }
+.secret-heart { color: #dfb3c180; }
+.toast { bottom: 112px; padding: 17px 27px; border-radius: 10px; background: #231928ed; backdrop-filter: blur(18px); color: #f0d7b8; }
+.photo-dialog { background: #1a1321; border-color: #c5a68b55; box-shadow: 0 25px 80px #0008; }
+.photo-dialog::backdrop { background: #090710e8; backdrop-filter: blur(12px); }
+
+@keyframes letter-float {
+  0%, 100% { transform: perspective(1000px) translateY(2px) rotate(-6deg) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); }
+  50% { transform: perspective(1000px) translateY(-12px) rotate(-3deg) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg)); }
+}
+@keyframes aura-breathe { from { opacity: .55; transform: scale(.95); } to { opacity: 1; transform: scale(1.05); } }
+@keyframes orbit-turn { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+@keyframes mist-drift { from { transform: translate(-2%, 0) scale(1); } to { transform: translate(3%, -3%) scale(1.08); } }
+@keyframes constellation-draw { from { stroke-dashoffset: 1600; } to { stroke-dashoffset: 0; } }
+
+@media (max-width: 1000px) {
+  .invitation { width: 86vw; gap: 12px; }
+  .envelope { width: 280px; height: 180px; }
+  .seal { top: 77px; }
+  .letter-orbit { width: 310px; height: 310px; }
+  .letter-orbit-two { width: 355px; height: 355px; }
+  .art-topline { top: 61px; }
+  .art-bottomline { bottom: 50px; }
+  .art-star-one { right: 0; }
+}
+
+@media (max-width: 760px) {
+  .page-frame { inset: 10px; }
+  .header { padding: 25px 26px; }
+  .signature { font-size: 9px; gap: 8px; letter-spacing: .1em; }
+  .signature-star { font-size: 25px; }
+  .music-button { min-height: 37px; padding: 8px 11px; font-size: 9px; }
+  .garden-backdrop { background-position: 61% center; opacity: .75; }
+  .sky-shade { background: linear-gradient(#0d0a1733, #0d0a1766 35%, #0d0a1799 75%, #0d0a17aa); }
+  .scene { padding: 112px 25px 115px; }
+  .invitation { display: flex; flex-direction: column; justify-content: center; width: 100%; gap: 0; padding: 98px 25px 115px; text-align: center; }
+  .invitation-art { order: -1; max-width: 390px; height: 295px; flex: 0 0 295px; margin-bottom: 12px; }
+  .invitation-copy { padding: 0; }
+  .invitation .eyebrow { justify-content: center; margin-bottom: 14px; font-size: 9px; letter-spacing: .18em; }
+  .invitation-name { margin: 0 0 16px; font-size: 64px; }
+  .invitation h1 { font-size: 31px; }
+  .invitation .subtitle { margin-top: 16px; line-height: 2.1; font-size: 12px; }
+  .invitation .primary { margin-top: 24px; min-height: 47px; }
+  .invitation-whisper { justify-content: center; margin-top: 21px; font-size: 9px; }
+  .small-rule { display: none; }
+  .envelope { width: 250px; height: 160px; margin: 10px 0 0; }
+  .seal { width: 42px; height: 42px; left: calc(50% - 21px); top: 68px; font-size: 25px; }
+  .envelope-address { bottom: 18px; font-size: 11px; }
+  .letter { font-size: 10px; padding: 14px 10px; gap: 6px; }
+  .envelope.opened .letter { transform: translateY(-104px); }
+  .letter-orbit { width: 255px; height: 255px; }
+  .letter-orbit-two { width: 288px; height: 288px; }
+  .art-topline { top: 0; font-size: 8px; }
+  .art-bottomline { bottom: 0; font-size: 9px; }
+  .art-star-one { top: 45px; right: 20px; font-size: 24px; }
+  .art-star-two { bottom: 40px; left: 23px; }
+  .footer { min-height: 85px; padding: 17px 25px 24px; }
+  .journey { gap: 9px; font-size: 8px; letter-spacing: .03em; }
+  .chapter-number { font-size: 18px; }
+  .journey-line { width: 27px; }
+  #chapter-label { max-width: 120px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .scene-navigation { gap: 16px; }
+  .back, .skip { font-size: 10px; letter-spacing: 0; }
+  .back span { margin-right: 5px; }
+  .skip span { margin-left: 5px; }
+  .footer-note { max-width: 83px; text-align: right; font-size: 8px; line-height: 1.8; }
+  .subtitle { font-size: 12px; letter-spacing: .04em; }
+  .eyebrow { font-size: 9px; letter-spacing: .18em; }
+  .secret-star { top: 115px; right: 4%; }
+  .secret-heart { bottom: 105px; left: 1%; }
+  .secret-gift { bottom: 145px; right: 1%; }
+  .birthday-copy { padding: 25px 0; }
+  .birthday-date { margin-bottom: 25px; }
+  .birthday-name { font-size: clamp(58px, 14vw, 92px); }
+  .tap-hint { bottom: 119px; font-size: 9px; }
+  .constellation-wrap { height: 255px; margin-top: 20px; }
+  .number-field { top: 26px; }
+  .year-label { bottom: 24px; }
+  .friendship h2 { max-width: 330px; font-size: 24px; }
+  .friendship .subtitle { max-width: 330px; }
+  .gallery { gap: 40px; margin-top: 40px; }
+  .polaroid { width: min(260px, 76vw); }
+  .polaroid img { height: 245px; }
+  .gallery-note { max-width: 290px; font-size: 10px; }
+  .cake-scene h2 { max-width: 320px; font-size: 25px; }
+  .cake-art { width: min(460px, 94vw); margin-top: 16px; }
+  .wish-paper { padding: 35px 25px 28px; }
+  .wish-paper .eyebrow { font-size: 8px; padding-right: 16px; }
+  .paper-star { top: 23px; right: 21px; font-size: 22px; }
+  .wish-text { min-height: 395px; }
+  .wish-text p { font-size: 12px; line-height: 2; }
+  .wish-text p:first-child { font-size: 18px; }
+  .paper-signature { font-size: 10px; }
+  .gift-scene h2 { max-width: 330px; font-size: 26px; }
+  .final-copy { padding: 20px 0; }
+  .final-copy h1 { font-size: clamp(49px, 13vw, 75px); }
+  .final-age { font-size: 19px; }
+  .final-actions { flex-direction: column; gap: 12px; margin-top: 26px; }
+  .final-actions button { width: 230px; }
+  .final-number { top: auto; }
+}
+
+@media (max-width: 380px) {
+  .header { padding: 23px 21px; }
+  .signature { font-size: 8px; }
+  .footer { padding-left: 21px; padding-right: 21px; }
+  .journey-line { display: none; }
+  .invitation { padding-top: 95px; }
+  .invitation-art { height: 270px; flex-basis: 270px; }
+  .letter-orbit { width: 240px; height: 240px; }
+  .letter-orbit-two { width: 265px; height: 265px; }
+  .invitation-name { font-size: 59px; }
+}
+
+@media (max-height: 760px) and (min-width: 761px) {
+  .invitation-art { height: 355px; }
+  .art-topline { top: 5px; }
+  .art-bottomline { bottom: 8px; }
+  .cake-art { width: min(510px, 72vh); }
+  .constellation-wrap { height: 250px; }
+  .number-field { top: 22px; }
+  .year-label { bottom: 18px; }
+  .final-number { top: auto; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+  .garden-backdrop { transform: none; will-change: auto; }
+  .reveal { filter: none; }
+  .count.pulse { animation: none; opacity: 1; }
+}
